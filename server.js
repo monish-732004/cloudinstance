@@ -116,12 +116,12 @@ app.get('/api/server-info', async (_req, res) => {
     let assignedServerId = 1;
     let assignedServerName = 'Server 1';
 
-    if (privateIp === '10.0.2.10') {
+    if (privateIp === '172.31.39.162') {
       assignedServerId = 2;
       assignedServerName = 'Server 2';
     }
 
-    if (privateIp === '10.0.3.10') {
+    if (privateIp === '172.31.40.97') {
       assignedServerId = 3;
       assignedServerName = 'Server 3';
     }
