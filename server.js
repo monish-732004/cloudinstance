@@ -1349,6 +1349,6 @@ app.get('/', (_req, res) => {
 </html>`);
 });
 
-app.listen(port, () => {
-  console.log('AWS ELB + ASG demo listening on port ' + port);
+app.listen(3000, '0.0.0.0', () => {
+  console.log('AWS ELB + ASG demo listening on port 3000');
 });
