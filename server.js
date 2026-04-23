@@ -3,6 +3,18 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Enable CORS for all routes
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
+
 app.use(express.json());
 
 const sim = {
@@ -139,18 +151,18 @@ app.get('/api/server-info', async (_req, res) => {
     console.log('EC2 metadata not available, using fallback for local development');
     
     // Simulate different private IPs for round-robin testing
-    const simulatedIps = ['10.0.1.10', '10.0.2.10', '10.0.3.10'];
+    const simulatedIps = ['10.0.1.10', '172.31.39.162', '172.31.40.97'];
     const randomIp = simulatedIps[Math.floor(Math.random() * simulatedIps.length)];
     
     let assignedServerId = 1;
     let assignedServerName = 'Server 1';
     
-    if (randomIp === '10.0.2.10') {
+    if (randomIp === '172.31.39.162') {
       assignedServerId = 2;
       assignedServerName = 'Server 2';
     }
     
-    if (randomIp === '10.0.3.10') {
+    if (randomIp === '172.31.40.97') {
       assignedServerId = 3;
       assignedServerName = 'Server 3';
     }
